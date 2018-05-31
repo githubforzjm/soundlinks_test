@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.wave.view.MainActivity">
+
+    <View
+        android:id="@+id/view_anim"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#00000000" />
+
+    <com.example.wave.view.MyRingWave
+        android:id="@+id/wave_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF" />
+
+
+    <Button
+        android:id="@+id/btn_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/selector_record_bg" />
+
+
+    <SeekBar
+        android:id="@+id/sb_frequence"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:max="100"
+        android:maxHeight="6dp"
+        android:minHeight="3dp"
+        android:progress="50"
+        android:progressDrawable="@drawable/layer_seekbar_background"
+        android:thumb="@drawable/selector_seekbar_thumb" />
+
+
+</RelativeLayout>
