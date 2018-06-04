@@ -22,10 +22,10 @@ import java.util.ArrayList;
 public class MyRingWave extends View {
     private static final String TAG = "MyRingWave";
 
-    private static final int SAMLLEST_DISTANCE = 40;// the smallest distance of two point
-    private static final int REFRESH_FREQUENCE = 40;//刷新间隔时间
-    private static final int ALPHA_DECREASE_DEGRESS = -5;// alpha 递减
-    private static final int RADIUS_INCREASE_DEGRESS = 3;//radius 递增
+    private static final int SAMLLEST_DISTANCE = 40;// 两个圆环之间的最小间距
+    private static final int REFRESH_FREQUENCE = 40;//每隔40ms刷新一次视图
+    private static final int ALPHA_DECREASE_DEGRESS = -5;// 每隔40ms圆环透明度减少5
+    private static final int RADIUS_INCREASE_DEGRESS = 3;//每隔40ms圆环半径增加3
 
 
     private ArrayList<Point> pointList;// 所有point
@@ -40,15 +40,13 @@ public class MyRingWave extends View {
 
     Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
-            flushDate();
+            flushData();
             invalidate();
 
             if (isRunning) {//继续刷新视图
                 handler.sendEmptyMessageDelayed(0, REFRESH_FREQUENCE);
             }
         }
-
-        ;
     };
 
     public MyRingWave(Context context, AttributeSet attrs) {
@@ -56,11 +54,11 @@ public class MyRingWave extends View {
         pointList = new ArrayList<Point>();
     }
 
-    protected void flushDate() {
+    protected void flushData() {
         for (int i = 0; i < pointList.size(); i++) {
             Point p = pointList.get(i);
             int alpha = p.p.getAlpha();
-            if (alpha == 0) {
+            if (alpha == 0) {//当圆环的透明度小于0时，不在绘制此圆环，所以reomve掉
                 pointList.remove(i);
                 continue;
             }
@@ -78,7 +76,7 @@ public class MyRingWave extends View {
         }
         Log.i(TAG, "flushDate size:" + pointList.size());
         if (pointList.size() == 0) {
-            isRunning = false;
+            isRunning = false;//圆环数量变为0时，不再进行绘制，此时onDraw不再被调用
         }
     }
 
@@ -138,6 +136,12 @@ public class MyRingWave extends View {
     }
 
 
+    /**
+     *
+     * @param x 圆点横坐标
+     * @param y 圆点纵坐标
+     * @param volume 值越大，颜色越深
+     */
     private void addPoint(int x, int y, int volume) {
 
         Paint paint = getPaint(volume);
@@ -151,7 +155,7 @@ public class MyRingWave extends View {
 
         } else {//
             Point p = pointList.get(pointList.size() - 1);
-            if (Math.abs(p.x - x) > SAMLLEST_DISTANCE || Math.abs(p.x - x) > SAMLLEST_DISTANCE) {
+            if (Math.abs(p.x - x) > SAMLLEST_DISTANCE || Math.abs(p.x - x) > SAMLLEST_DISTANCE) {//控制圆点之间的距离，不至于太小
                 addPointToList(x, y, paint);
             }
         }
