@@ -20,7 +20,7 @@ public class MainActivity extends Activity implements IRecordView {
 
     View viewAnim;
     Button btnRecord;
-    MyRingWave waveView;
+    MyRingWave1 waveView;
     SeekBar seekBar;
 
     @Override
@@ -37,7 +37,7 @@ public class MainActivity extends Activity implements IRecordView {
     private void findView() {
         viewAnim = findViewById(R.id.view_anim);
         btnRecord = (Button) findViewById(R.id.btn_record);
-        waveView = (MyRingWave) findViewById(R.id.wave_view);
+        waveView = (MyRingWave1) findViewById(R.id.wave_view);
         seekBar = (SeekBar) findViewById(R.id.sb_frequence);
 
     }
