@@ -160,7 +160,7 @@ public class MyRingWave1 extends View {
 
         } else {//
             Point p = pointList.get(pointList.size() - 1);
-            if (Math.abs(p.x - x) > SAMLLEST_DISTANCE || Math.abs(p.x - x) > SAMLLEST_DISTANCE) {//控制圆点之间的距离，不至于太小
+            if (Math.abs(p.x - x) > SAMLLEST_DISTANCE && Math.abs(p.y - y) > SAMLLEST_DISTANCE) {//控制圆点之间的距离，不至于太小
                 addPointToList(x, y, paint);
             }
         }
